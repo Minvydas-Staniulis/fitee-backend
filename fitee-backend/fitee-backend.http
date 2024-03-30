@@ -1,0 +1,6 @@
+@fitee_backend_HostAddress = http://localhost:5015
+
+GET {{fitee_backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
