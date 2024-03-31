@@ -104,13 +104,13 @@ namespace fitee_backend.Controllers
         // DELETE api/<RunningApi>/5
         [HttpDelete]
         [Route("api/[controller]/DeleteRunning/{id}")]
-        public IActionResult Delete(int id, RunningModel runningModel)
+        public IActionResult Delete(int id)
         {
             ResponseType type = ResponseType.Success;
             try
             {
                 _db.DeleteRunning(id);
-                return Ok(ResponseHandler.GetAppResponse(type, runningModel));
+                return Ok(ResponseHandler.GetAppResponse(type, null));
             }
             catch (Exception ex)
             {
