@@ -19,6 +19,7 @@ namespace fitee_backend.Model
                 name =row.name,
                 distance=row.distance,
                 running_time=row.running_time,
+                pace=row.pace,
             }));
             return response;
         }
@@ -37,6 +38,7 @@ namespace fitee_backend.Model
                 name = dataList.name,
                 distance = dataList.distance,
                 running_time = dataList.running_time,
+                pace = dataList.pace,
             };
         }
 
@@ -60,6 +62,9 @@ namespace fitee_backend.Model
             dbTable.name = runningModel.name;
             dbTable.distance = runningModel.distance;
             dbTable.running_time = runningModel.running_time;
+            dbTable.pace = runningModel.pace;
+
+            System.Diagnostics.Debug.WriteLine(dbTable.pace);
 
             _context.SaveChanges();
         }
