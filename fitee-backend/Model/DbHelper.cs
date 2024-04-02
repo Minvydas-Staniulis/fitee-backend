@@ -53,7 +53,7 @@ namespace fitee_backend.Model
             }
             else
             {
-                dbTable = new Running(); // No need to set ID for new records
+                dbTable = new Running();
                 _context.Runnings.Add(dbTable);
             }
 
@@ -73,7 +73,7 @@ namespace fitee_backend.Model
             }
 
             _context.Runnings.Remove(dbTable);
-            _context.SaveChanges(); // Save changes to the database
+            _context.SaveChanges();
         }
     }
 
