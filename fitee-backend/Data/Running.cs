@@ -13,5 +13,7 @@ namespace fitee_backend.Data
         public string name { get; set; }
         public float distance { get; set; }
         public TimeSpan running_time { get; set; }
+        public TimeSpan pace {  get; set; }
+       
     }
 }

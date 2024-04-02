@@ -1,6 +1,7 @@
 ﻿using fitee_backend.Data;
 using fitee_backend.Model;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -72,8 +73,15 @@ namespace fitee_backend.Controllers
             ResponseType type = ResponseType.Success;
             try
             {
+                double paceMinutes = runningModel.running_time.TotalMinutes / runningModel.distance;
+                runningModel.pace = TimeSpan.FromMinutes(paceMinutes);
+
                 _db.SaveRunning(runningModel);
                 return Ok(ResponseHandler.GetAppResponse(type, runningModel));
+            }
+            catch (JsonException)
+            {
+                return BadRequest("Invalid JSON payload for running_time property.");
             }
             catch (Exception ex)
             {
@@ -90,7 +98,7 @@ namespace fitee_backend.Controllers
             ResponseType type = ResponseType.Success;
             try
             {
-                runningModel.id = id; // Ensure the ID matches the URL
+                runningModel.id = id;
                 _db.SaveRunning(runningModel);
                 return Ok(ResponseHandler.GetAppResponse(type, runningModel));
             }
