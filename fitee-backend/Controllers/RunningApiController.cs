@@ -1,13 +1,12 @@
 ﻿using fitee_backend.Data;
+using fitee_backend.DataAccess;
 using fitee_backend.Model;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace fitee_backend.Controllers
 {
-    
+
     [ApiController]
     public class RunningApiController : ControllerBase
     {
@@ -18,10 +17,9 @@ namespace fitee_backend.Controllers
             _db = new DbHelper(appDbContext);
 
         }
-        // GET: api/<RunningApi>
         [HttpGet]
         [Route("api/[controller]/GetRunnings")]
-        public IActionResult Get()
+        public IActionResult Get(string name = null)
         {
             ResponseType type = ResponseType.Success;
             try
@@ -65,7 +63,6 @@ namespace fitee_backend.Controllers
             }
         }
 
-        // POST api/<RunningApi>
         [HttpPost]
         [Route("api/[controller]/AddRunning")]
         public IActionResult Post([FromBody] RunningModel runningModel)
@@ -90,7 +87,6 @@ namespace fitee_backend.Controllers
             }
         }
 
-        // PUT api/<RunningApi>/5
         [HttpPut]
         [Route("api/[controller]/UpdateRunning/{id}")]
         public IActionResult Put(int id, [FromBody] RunningModel runningModel)
@@ -109,7 +105,6 @@ namespace fitee_backend.Controllers
             }
         }
 
-        // DELETE api/<RunningApi>/5
         [HttpDelete]
         [Route("api/[controller]/DeleteRunning/{id}")]
         public IActionResult Delete(int id)

@@ -1,6 +1,7 @@
 ﻿using fitee_backend.Data;
+using fitee_backend.Model;
 
-namespace fitee_backend.Model
+namespace fitee_backend.DataAccess
 {
     public class DbHelper
     {
@@ -9,18 +10,28 @@ namespace fitee_backend.Model
         {
             _context = context;
         }
-        public List<RunningModel> GetRunnings()
+        public List<RunningModel> GetRunnings(string name = null)
         {
             List<RunningModel> response = new List<RunningModel>();
+
+            IQueryable<Running> query = _context.Runnings;
+
+            if(!string.IsNullOrEmpty(name) )
+            {
+                query = query.Where(r => r.name.Contains(name));
+            }
+
             var dataList = _context.Runnings.ToList();
+
             dataList.ForEach(row => response.Add(new RunningModel()
             {
                 id = row.id,
-                name =row.name,
-                distance=row.distance,
-                running_time=row.running_time,
-                pace=row.pace,
+                name = row.name,
+                distance = row.distance,
+                running_time = row.running_time,
+                pace = row.pace,
             }));
+
             return response;
         }
 
@@ -82,5 +93,5 @@ namespace fitee_backend.Model
         }
     }
 
-    
+
 }
