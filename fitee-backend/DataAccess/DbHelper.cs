@@ -21,7 +21,7 @@ namespace fitee_backend.DataAccess
                 query = query.Where(r => r.name.Contains(name));
             }
 
-            var dataList = _context.Runnings.ToList();
+            var dataList = query.ToList();
 
             dataList.ForEach(row => response.Add(new RunningModel()
             {

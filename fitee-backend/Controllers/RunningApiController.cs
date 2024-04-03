@@ -24,7 +24,7 @@ namespace fitee_backend.Controllers
             ResponseType type = ResponseType.Success;
             try
             {
-                IEnumerable<RunningModel> data = _db.GetRunnings();
+                IEnumerable<RunningModel> data = _db.GetRunnings(name);
                 
                 if(!data.Any())
                 {
