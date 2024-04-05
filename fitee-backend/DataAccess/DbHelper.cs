@@ -1,5 +1,6 @@
 ﻿using fitee_backend.Data;
 using fitee_backend.Model;
+using System.Xml.Linq;
 
 namespace fitee_backend.DataAccess
 {
@@ -51,6 +52,18 @@ namespace fitee_backend.DataAccess
                 running_time = dataList.running_time,
                 pace = dataList.pace,
             };
+        }
+
+        public float GetTotalRunDistance(List<RunningModel> response)
+        {
+            float totalDistance = 0;
+
+            foreach (var row in response)
+            {
+                totalDistance += row.distance;
+            }
+
+            return totalDistance;
         }
 
         public void SaveRunning(RunningModel runningModel)

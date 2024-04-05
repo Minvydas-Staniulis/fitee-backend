@@ -39,6 +39,26 @@ namespace fitee_backend.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/[controller]/TotalRunDistance")]
+        public IActionResult GetTotalRunDistance()
+        {
+            try
+            {
+                List<RunningModel> runnings = _db.GetRunnings();
+
+                float totalRunDistance = _db.GetTotalRunDistance(runnings);
+
+                var result = new { totalDistance = totalRunDistance };
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+
         // GET api/<RunningApi>/5
         [HttpGet]
         [Route("api/[controller]/GetRunningById/{id}")]
