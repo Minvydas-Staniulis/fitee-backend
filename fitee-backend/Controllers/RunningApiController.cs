@@ -1,6 +1,7 @@
 ﻿using fitee_backend.Data;
 using fitee_backend.DataAccess;
 using fitee_backend.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
@@ -18,6 +19,7 @@ namespace fitee_backend.Controllers
 
         }
         [HttpGet]
+        [Authorize]
         [Route("api/[controller]/GetRunnings")]
         public IActionResult Get(string name = null)
         {
@@ -40,6 +42,7 @@ namespace fitee_backend.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("api/[controller]/TotalRunDistance")]
         public IActionResult GetTotalRunDistance()
         {
@@ -61,6 +64,7 @@ namespace fitee_backend.Controllers
 
         // GET api/<RunningApi>/5
         [HttpGet]
+        [Authorize]
         [Route("api/[controller]/GetRunningById/{id}")]
         public IActionResult Get(int id)
         {
@@ -84,6 +88,7 @@ namespace fitee_backend.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("api/[controller]/AddRunning")]
         public IActionResult Post([FromBody] RunningModel runningModel)
         {
@@ -108,6 +113,7 @@ namespace fitee_backend.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [Route("api/[controller]/UpdateRunning/{id}")]
         public IActionResult Put(int id, [FromBody] RunningModel runningModel)
         {
@@ -126,6 +132,7 @@ namespace fitee_backend.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("api/[controller]/DeleteRunning/{id}")]
         public IActionResult Delete(int id)
         {
