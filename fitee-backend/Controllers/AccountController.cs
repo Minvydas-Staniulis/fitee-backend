@@ -15,16 +15,18 @@ namespace fitee_backend.Controllers
         private readonly UserManager<User> _userManager;
         private readonly ITokenService _tokenService;
         private readonly SignInManager<User> _signInManager;
+
         public AccountController(UserManager<User> userManager, ITokenService tokenService, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _tokenService = tokenService;
+            _signInManager = signInManager;
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -54,7 +56,7 @@ namespace fitee_backend.Controllers
         {
             try
             {
-                if(!ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
                 }
@@ -67,7 +69,8 @@ namespace fitee_backend.Controllers
 
                 var createdUser = await _userManager.CreateAsync(appUser, registerDto.Password);
 
-                if (createdUser.Succeeded) {
+                if (createdUser.Succeeded)
+                {
                     var roleResult = await _userManager.AddToRoleAsync(appUser, "User");
                     if (roleResult.Succeeded)
                     {
@@ -79,15 +82,17 @@ namespace fitee_backend.Controllers
                                 Token = _tokenService.CreateToken(appUser),
                             }
                             );
-                    } else
+                    }
+                    else
                     {
                         return StatusCode(500, roleResult.Errors);
                     }
-                } else
+                }
+                else
                 {
                     return StatusCode(500, createdUser.Errors);
                 }
-            } 
+            }
             catch (Exception ex)
             {
                 return StatusCode(500, ex);
